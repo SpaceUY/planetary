@@ -1,20 +1,22 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 
-import {
-  type AvailableModule,
-  MODULE_IMPLEMENTATIONS,
-} from "../configs/available-modules";
+import { ModuleImplementationConfig } from "../../../utils/get-modules";
 
 /**
  * Choose an implementation for the chosen module.
  * @param {string} module - The module to choose an implementation for.
- * @returns {string} The chosen implementation.
+ * @returns {string | undefined} The chosen implementation. Undefined if the module has a single implementations.
  * */
 export const chooseImplementation = async (
-  module: AvailableModule
+  implementations: ModuleImplementationConfig[]
 ): Promise<string> => {
-  const availableImplementations = MODULE_IMPLEMENTATIONS[module];
+  if (implementations.length === 1) {
+    console.log(
+      `✓ Using default implementation: ${chalk.green(implementations[0].name)}`
+    );
+    return implementations[0].name;
+  }
 
   const questions = [
     {
@@ -23,10 +25,13 @@ export const chooseImplementation = async (
       message: `Which implementation for the ${chalk.cyan(
         module
       )} module would you like to add?`,
-      choices: availableImplementations,
+      choices: implementations.map((implementation) => implementation.name),
     },
   ];
 
   const answers = await inquirer.prompt(questions);
-  return answers.implementation;
+  const implementation = answers.implementation;
+
+  console.log(`✓ Using implementation: ${chalk.green(implementation)}`);
+  return implementation;
 };

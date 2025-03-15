@@ -3,37 +3,44 @@
 import { Command } from "commander";
 import { version } from "../package.json";
 import { addNestModule } from "./commands/nest";
+import { addPlanetaryComponent } from "./commands/planetary";
+import { COMMANDS } from "./utils/commands";
 
 const program = new Command();
 
 program
-  .name("space-cli")
+  .name("planetary")
   .description(
     "CLI tool to clone common components from the SpaceDev boilerplate repos. "
   )
   .version(version);
 
-// program
-//   .command("create")
-//   .description("Create a new project from a template")
-//   .option(
-//     "-t, --template <template>",
-//     "Template to use (nest, react, react-native)"
-//   )
-//   .option("-d, --destination <path>", "Destination folder")
-//   .option(
-//     "-r, --repository <url>",
-//     "GitHub repository URL",
-//     "https://github.com/yourusername/your-templates-repo"
-//   )
-//   .action(createProject);
+program
+  .description(
+    "Copies a component for either of the provided SpaceDev template repositories."
+  )
+  .option("-m, --module <module>", "Module to copy")
+  .option(
+    "-b, --branch <branch>",
+    "Branch to copy from. If not provided, uses the default branch in the target repository"
+  )
+  .option(
+    "-d, --destination <path>",
+    "Destination folder, defaults to `.`",
+    "."
+  )
+  .action(addPlanetaryComponent);
 
 program
-  .command("nest")
+  .command(COMMANDS.NEST)
   .description(
     "Copies a specified NestJS module from the SpaceDev template repo."
   )
   .option("-m, --module <module>", "Module to copy")
+  .option(
+    "-b, --branch <branch>",
+    "Branch to copy from. If not provided, uses the default branch in the target repository"
+  )
   .option(
     "-d, --destination <path>",
     "Destination folder, defaults to `.`",
@@ -42,8 +49,3 @@ program
   .action(addNestModule);
 
 program.parse(process.argv);
-
-// If no arguments are provided, show help
-if (!process.argv.slice(2).length) {
-  program.outputHelp();
-}
