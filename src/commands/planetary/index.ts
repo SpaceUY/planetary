@@ -2,7 +2,10 @@ import chalk from "chalk";
 import inquirer from "inquirer";
 
 import { addNestModule } from "../nest";
-import { printWelcomeMessage } from "../../utils/shared-prints";
+import {
+  printUnderConstructionMessage,
+  printWelcomeMessage,
+} from "../../utils/shared-prints";
 
 export interface PlanetaryOptions {
   destination: string;
@@ -46,10 +49,6 @@ export const addPlanetaryComponent = async (
       await addNestModule(options, true);
       break;
     default:
-      console.error(
-        chalk.yellow(
-          `Implementation not yet available for ${app}. We're working on it!`
-        )
-      );
+      await printUnderConstructionMessage(app);
   }
 };

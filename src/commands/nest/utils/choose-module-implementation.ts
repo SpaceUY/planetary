@@ -5,10 +5,12 @@ import { ModuleImplementationConfig } from "../../../utils/get-modules";
 
 /**
  * Choose an implementation for the chosen module.
- * @param {string} module - The module to choose an implementation for.
+ * @param {string} moduleName - The module to choose an implementation for.
+ * @param {ModuleImplementationConfig[]} implementations - The available implementations for the module.
  * @returns {string | undefined} The chosen implementation. Undefined if the module has a single implementations.
  * */
 export const chooseImplementation = async (
+  moduleName: string,
   implementations: ModuleImplementationConfig[]
 ): Promise<string> => {
   if (implementations.length === 1) {
@@ -23,7 +25,7 @@ export const chooseImplementation = async (
       type: "list",
       name: "implementation",
       message: `Which implementation for the ${chalk.cyan(
-        module
+        moduleName
       )} module would you like to add?`,
       choices: implementations.map((implementation) => implementation.name),
     },

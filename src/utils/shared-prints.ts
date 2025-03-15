@@ -79,3 +79,24 @@ ${chalk.yellow("Happy coding! 🎉")}
     })
   );
 };
+
+/**
+ * Prints a message indicating that a app is under construction.
+ * @param {string} app - The app that is under construction.
+ */
+export const printUnderConstructionMessage = async (
+  app: string
+): Promise<void> => {
+  const { default: boxen } = await import("boxen");
+  const message = `🚧 Implementation not yet available for ${chalk.yellow(
+    app
+  )}. We're working on it!`;
+
+  console.log("");
+  console.log(
+    boxen(message, {
+      padding: 1,
+      borderColor: "yellow",
+    })
+  );
+};

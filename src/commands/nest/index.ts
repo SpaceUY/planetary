@@ -34,7 +34,10 @@ export const addNestModule = async (
     const moduleConfig = await chooseModule(availableModules, options.module);
 
     const implementations = moduleConfig.implementations;
-    const implementation = await chooseImplementation(implementations);
+    const implementation = await chooseImplementation(
+      moduleConfig.name,
+      implementations
+    );
 
     const pathInRepository = `${moduleConfig.path}/${implementation}`;
 
