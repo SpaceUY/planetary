@@ -1,4 +1,4 @@
-# Space CLI
+# Planetary CLI
 
 A command-line tool for internal usage that copies specific folders from the template (boilerplate) folders into a chosen folder. This is designed to work similarly to ShadCN - the copies are independent from the template, and can be modified and customized at will.
 
