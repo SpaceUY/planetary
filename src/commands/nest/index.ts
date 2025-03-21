@@ -39,7 +39,8 @@ export const addNestModule = async (
       implementations
     );
 
-    const pathInRepository = `${moduleConfig.path}/${implementation}`;
+    const { path: implPath, name: implName } = implementation;
+    const pathInRepository = `${moduleConfig.path}/${implPath ?? implName}`;
 
     await cloneRepository(
       moduleConfig.name,
