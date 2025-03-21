@@ -20,6 +20,7 @@ interface PlanetaryConfig {
 export interface ModuleImplementationConfig {
   name: string;
   description: string;
+  path?: string;
 }
 
 export interface ModuleConfig {
