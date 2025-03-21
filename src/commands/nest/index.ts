@@ -14,7 +14,7 @@ import {
 } from "../../utils/shared-prints";
 import { COMMANDS } from "../../utils/commands";
 
-export const REPOSITORY = "frankmangone/nest-template-test";
+export const REPOSITORY = "SpaceUY/NestJS-Template";
 
 /**
  * Add a NestJS module to a project.
@@ -40,7 +40,14 @@ export const addNestModule = async (
     );
 
     const { path: implPath, name: implName } = implementation;
-    const pathInRepository = `${moduleConfig.path}/${implPath ?? implName}`;
+
+    let pathInRepository = "";
+
+    if (implPath === "") {
+      pathInRepository = `${moduleConfig.path}`;
+    } else {
+      pathInRepository = `${moduleConfig.path}/${implPath ?? implName}`;
+    }
 
     await cloneRepository(
       moduleConfig.name,
