@@ -12,12 +12,12 @@ import { ModuleImplementationConfig } from "../../../utils/get-modules";
 export const chooseImplementation = async (
   moduleName: string,
   implementations: ModuleImplementationConfig[]
-): Promise<string> => {
+): Promise<ModuleImplementationConfig> => {
   if (implementations.length === 1) {
     console.log(
       `✓ Using default implementation: ${chalk.green(implementations[0].name)}`
     );
-    return implementations[0].name;
+    return implementations[0];
   }
 
   const questions = [
@@ -35,5 +35,5 @@ export const chooseImplementation = async (
   const implementation = answers.implementation;
 
   console.log(`✓ Using implementation: ${chalk.green(implementation)}`);
-  return implementation;
+  return implementations.find((impl) => impl.name === implementation)!;
 };
