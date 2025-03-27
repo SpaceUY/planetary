@@ -30,7 +30,7 @@ export const addNestModule = async (
   await new Promise((res) => setTimeout(res, 200));
 
   try {
-    const availableModules = await getAvailableModules(REPOSITORY);
+    const availableModules = await getAvailableModules(REPOSITORY, options.branch);
     const moduleConfig = await chooseModule(availableModules, options.module);
 
     const implementations = moduleConfig.implementations;
