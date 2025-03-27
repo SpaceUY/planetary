@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import inquirer from "inquirer";
 
 // ================================================
 
@@ -13,6 +14,7 @@ import {
   printWelcomeMessage,
 } from "../../utils/shared-prints";
 import { COMMANDS } from "../../utils/commands";
+import { chooseDestination } from "./utils/choose-destination";
 
 export const REPOSITORY = "SpaceUY/NestJS-Template";
 
@@ -30,7 +32,10 @@ export const addNestModule = async (
   await new Promise((res) => setTimeout(res, 200));
 
   try {
-    const availableModules = await getAvailableModules(REPOSITORY, options.branch);
+    const availableModules = await getAvailableModules(
+      REPOSITORY,
+      options.branch
+    );
     const moduleConfig = await chooseModule(availableModules, options.module);
 
     const implementations = moduleConfig.implementations;
@@ -38,6 +43,8 @@ export const addNestModule = async (
       moduleConfig.name,
       implementations
     );
+
+    options.destination = await chooseDestination(options.destination);
 
     const { path: implPath, name: implName } = implementation;
 
