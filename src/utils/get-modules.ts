@@ -34,14 +34,16 @@ export interface ModuleConfig {
  * @returns {Promise<Record<string, ModuleConfig>>} The available modules and their configurations
  */
 export const getAvailableModules = async (
-  repository: string
+  repository: string,
+  branch?: string
 ): Promise<Record<string, ModuleConfig>> => {
   const spinner = ora("Fetching available modules...").start();
-
+  const branchQuery = branch ? `?ref=${branch}` : "";
+  
   try {
     // Fetch the planetary.json file from the repository
     const response = await fetch(
-      `https://api.github.com/repos/${repository}/contents/planetary.json`,
+      `https://api.github.com/repos/${repository}/contents/planetary.json${branchQuery}`,
       { headers: { Accept: "application/vnd.github.v3+json" } }
     );
 

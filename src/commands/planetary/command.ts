@@ -16,10 +16,6 @@ export const usePlanetaryCommand = (program: Command): void => {
       "-b, --branch <branch>",
       "Branch to copy from. If not provided, uses the default branch in the target repository"
     )
-    .option(
-      "-d, --destination <path>",
-      "Destination folder, defaults to `.`",
-      "."
-    )
+    .option("-d, --destination <path>", "Destination folder")
     .action(addPlanetaryComponent);
 };
