@@ -1,11 +1,6 @@
 import chalk from "chalk";
-import inquirer from "inquirer";
 
 // ================================================
-
-import { chooseModule } from "./utils/choose-module";
-import { chooseImplementation } from "./utils/choose-module-implementation";
-import { cloneRepository } from "./utils/clone-repository";
 
 import { getAvailableModules } from "../../utils/get-modules";
 import { PlanetaryOptions } from "../planetary";
@@ -14,7 +9,10 @@ import {
   printWelcomeMessage,
 } from "../../utils/shared-prints";
 import { COMMANDS } from "../../utils/commands";
-import { chooseDestination } from "./utils/choose-destination";
+import { chooseModule } from "../../utils/choose-module";
+import { chooseImplementation } from "../../utils/choose-module-implementation";
+import { chooseDestination } from "../../utils/choose-destination";
+import { cloneRepository } from "../../utils/clone-repository";
 
 export const REPOSITORY = "SpaceUY/NestJS-Template";
 

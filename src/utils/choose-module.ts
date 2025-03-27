@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 
-import { ModuleConfig } from "../../../utils/get-modules";
+import { ModuleConfig } from "./get-modules";
 
 /**
  * Choose a module from the available modules, either by using the `--module` flag, or through an interactive prompt.

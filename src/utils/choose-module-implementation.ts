@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 
-import { ModuleImplementationConfig } from "../../../utils/get-modules";
+import { ModuleImplementationConfig } from "./get-modules";
 
 /**
  * Choose an implementation for the chosen module.

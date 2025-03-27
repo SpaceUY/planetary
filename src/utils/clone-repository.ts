@@ -3,7 +3,7 @@ import chalk from "chalk";
 import * as fs from "fs-extra";
 import * as path from "path";
 
-import { REPOSITORY } from "..";
+import { REPOSITORY } from "../commands/nest";
 
 /**
  * Clone the repository for the chosen module and implementation, via the GitHub API.
