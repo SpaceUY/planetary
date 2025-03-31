@@ -1,7 +1,8 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 
-import { ModuleConfig } from "../../../utils/get-modules";
+import { ModuleConfig } from "./get-modules";
+import { printStep } from "./shared-prints";
 
 /**
  * Choose a module from the available modules, either by using the `--module` flag, or through an interactive prompt.
@@ -12,6 +13,8 @@ export const chooseModule = async (
   availableModules: Record<string, ModuleConfig>,
   module?: string
 ): Promise<ModuleConfig> => {
+  printStep("Choose a module to add");
+
   const moduleChoices = Object.keys(availableModules);
 
   if (!module) {

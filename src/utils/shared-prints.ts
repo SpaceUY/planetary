@@ -100,3 +100,13 @@ export const printUnderConstructionMessage = async (
     })
   );
 };
+
+/**
+ * Prints a step marker with an optional message and continues the flow line
+ * @param {string} message - Message to display next to the step marker
+ */
+export const printStep = (message: string): void => {
+  console.log("");
+  console.log(chalk.cyan("○"), message);
+  console.log(chalk.cyan("│"));
+};

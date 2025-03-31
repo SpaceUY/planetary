@@ -8,7 +8,7 @@ import {
 } from "../../utils/shared-prints";
 
 export interface PlanetaryOptions {
-  destination: string;
+  destination?: string;
   module?: string;
   branch?: string;
 }

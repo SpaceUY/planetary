@@ -1,7 +1,8 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 
-import { ModuleImplementationConfig } from "../../../utils/get-modules";
+import { ModuleImplementationConfig } from "./get-modules";
+import { printStep } from "./shared-prints";
 
 /**
  * Choose an implementation for the chosen module.
@@ -13,6 +14,8 @@ export const chooseImplementation = async (
   moduleName: string,
   implementations: ModuleImplementationConfig[]
 ): Promise<ModuleImplementationConfig> => {
+  printStep("Choose an implementation");
+
   if (implementations.length === 1) {
     console.log(
       `✓ Using default implementation: ${chalk.green(implementations[0].name)}`

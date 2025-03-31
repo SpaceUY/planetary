@@ -2,10 +2,6 @@ import chalk from "chalk";
 
 // ================================================
 
-import { chooseModule } from "./utils/choose-module";
-import { chooseImplementation } from "./utils/choose-module-implementation";
-import { cloneRepository } from "./utils/clone-repository";
-
 import { getAvailableModules } from "../../utils/get-modules";
 import { PlanetaryOptions } from "../planetary";
 import {
@@ -13,6 +9,10 @@ import {
   printWelcomeMessage,
 } from "../../utils/shared-prints";
 import { COMMANDS } from "../../utils/commands";
+import { chooseModule } from "../../utils/choose-module";
+import { chooseImplementation } from "../../utils/choose-module-implementation";
+import { chooseDestination } from "../../utils/choose-destination";
+import { cloneRepository } from "../../utils/clone-repository";
 
 export const REPOSITORY = "SpaceUY/NestJS-Template";
 
@@ -30,7 +30,10 @@ export const addNestModule = async (
   await new Promise((res) => setTimeout(res, 200));
 
   try {
-    const availableModules = await getAvailableModules(REPOSITORY);
+    const availableModules = await getAvailableModules(
+      REPOSITORY,
+      options.branch
+    );
     const moduleConfig = await chooseModule(availableModules, options.module);
 
     const implementations = moduleConfig.implementations;
@@ -38,6 +41,8 @@ export const addNestModule = async (
       moduleConfig.name,
       implementations
     );
+
+    options.destination = await chooseDestination(options.destination);
 
     const { path: implPath, name: implName } = implementation;
 
