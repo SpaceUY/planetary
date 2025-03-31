@@ -51,8 +51,30 @@ async function downloadDirectory(
       `Downloaded directory listing for ${currentPath ?? "root"}`
     );
 
-    // Ensure the destination directory exists
-    await fs.ensureDir(destination);
+    // Check if destination exists and handle appropriately
+    try {
+      const stats = await fs.stat(destination);
+
+      // If destination exists and is a file, throw an error
+      if (stats.isFile()) {
+        throw new Error(
+          `Cannot create directory at ${chalk.cyan(destination)}: ` +
+            `A file already exists at this location`
+        );
+      }
+
+      // If it's a directory, we'll use it
+      spinner.info(`Using existing directory at ${chalk.cyan(destination)}`);
+    } catch (error: any) {
+      // If error is ENOENT (doesn't exist), create the directory
+      if (error.code === "ENOENT") {
+        await fs.mkdir(destination, { recursive: true });
+        spinner.info(`Created new directory at ${chalk.cyan(destination)}`);
+      } else {
+        // If it's any other error, throw it
+        throw error;
+      }
+    }
 
     // Process each item (file or directory)
     for (const item of data) {

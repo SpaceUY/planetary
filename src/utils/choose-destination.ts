@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import { printStep } from "./shared-prints";
 
 /**
  * Prompts the user to choose a destination path if not provided
@@ -9,6 +10,8 @@ export const chooseDestination = async (
   destination?: string
 ): Promise<string> => {
   if (destination) return destination;
+
+  printStep("Set up the destination");
 
   const { chosenDestination } = await inquirer.prompt([
     {
