@@ -28,6 +28,7 @@ export const cloneRepository = async (
     console.error(
       chalk.red(`✗ Failed to download ${moduleName} template: ${error.message}`)
     );
+    throw error;
   }
 };
 
