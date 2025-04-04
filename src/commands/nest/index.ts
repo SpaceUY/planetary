@@ -61,7 +61,7 @@ export const addNestModule = async (
       options.branch
     );
 
-    await printSuccessMessage(moduleConfig.name);
+    await printSuccessMessage(moduleConfig.name, implementation);
   } catch (error: any) {
     console.error(chalk.red("Error copying NestJS module:"), error.message);
   }
