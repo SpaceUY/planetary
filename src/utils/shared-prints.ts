@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import { ModuleImplementationConfig } from "./get-modules";
 // import { version } from "../../package.json";
 
 /**
@@ -55,11 +56,26 @@ export const printWelcomeMessage = async (command?: string): Promise<void> => {
  * Prints a success message after a component has been successfully added
  * @param {string} module - The module that was added
  */
-export const printSuccessMessage = async (module: string): Promise<void> => {
+export const printSuccessMessage = async (
+  module: string,
+  implementation?: ModuleImplementationConfig
+): Promise<void> => {
   const { default: boxen } = await import("boxen");
+
+  let dependenciesMessage;
+  if (implementation?.dependencies?.length) {
+    dependenciesMessage = chalk.yellow(
+      "To begin working with this component, you must install the following dependencies:"
+    );
+    dependenciesMessage = `${dependenciesMessage}\n$ pnpm install ${chalk.cyan(
+      implementation.dependencies.join(" ")
+    )}\n`;
+  }
+
   const message = `
 ${chalk.green("✓")} Successfully added the ${chalk.cyan(module)} component
 
+${dependenciesMessage}
 ${chalk.cyan("What's next?")}
 - Check out the added files to understand how they work
 - Review the documentation at ${chalk.underline(

@@ -11,6 +11,7 @@ import { REPOSITORY } from "../commands/nest";
  * @param {string} pathInRepository - The path in the repository to clone elements from.
  * @param {string} destination - The destination path to clone the repository to.
  * @param {string} branch ? - The branch to clone from.
+ * @param {ModuleImplementationConfig} implementation ? - The implementation configuration.
  * */
 export const cloneRepository = async (
   moduleName: string,
