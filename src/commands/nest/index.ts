@@ -26,9 +26,6 @@ export const addNestModule = async (
 ): Promise<void> => {
   if (!skipWelcome) await printWelcomeMessage(COMMANDS.NEST);
 
-  // Wait for 200ms to ensure the box is printed
-  await new Promise((res) => setTimeout(res, 200));
-
   try {
     const availableModules = await getAvailableModules(
       REPOSITORY,

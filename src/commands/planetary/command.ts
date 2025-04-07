@@ -8,6 +8,7 @@ import { addPlanetaryComponent } from ".";
  */
 export const usePlanetaryCommand = (program: Command): void => {
   program
+    .command("default", { isDefault: true })
     .description(
       "Copies a component for either of the provided SpaceDev template repositories."
     )

@@ -63,19 +63,19 @@ export const printSuccessMessage = async (
   const { default: boxen } = await import("boxen");
 
   let dependenciesMessage;
+
   if (implementation?.dependencies?.length) {
     dependenciesMessage = chalk.yellow(
-      "To begin working with this component, you must install the following dependencies:"
+      "\nTo begin working with this component, you must install the following dependencies:"
     );
-    dependenciesMessage = `${dependenciesMessage}\n$ pnpm install ${chalk.cyan(
+    dependenciesMessage = `${dependenciesMessage}\n\n$ pnpm install ${chalk.cyan(
       implementation.dependencies.join(" ")
     )}\n`;
   }
 
   const message = `
 ${chalk.green("✓")} Successfully added the ${chalk.cyan(module)} component
-
-${dependenciesMessage}
+${dependenciesMessage ?? ""}
 ${chalk.cyan("What's next?")}
 - Check out the added files to understand how they work
 - Review the documentation at ${chalk.underline(
