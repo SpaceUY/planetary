@@ -11,6 +11,7 @@ import { REPOSITORY } from "../commands/nest";
  * @param {string} pathInRepository - The path in the repository to clone elements from.
  * @param {string} destination - The destination path to clone the repository to.
  * @param {string} branch ? - The branch to clone from.
+ * @param {ModuleImplementationConfig} implementation ? - The implementation configuration.
  * */
 export const cloneRepository = async (
   moduleName: string,
@@ -27,6 +28,7 @@ export const cloneRepository = async (
     console.error(
       chalk.red(`✗ Failed to download ${moduleName} template: ${error.message}`)
     );
+    throw error;
   }
 };
 
@@ -38,11 +40,11 @@ async function downloadDirectory(
 ): Promise<void> {
   const spinner = ora(`Downloading ${currentPath ?? "root"}...`).start();
 
-  branch = branch ? `?ref=${branch}` : "";
+  const query = branch ? `?ref=${branch}` : "";
 
   try {
     const response = await fetch(
-      `https://api.github.com/repos/${REPOSITORY}/contents/${currentPath}${branch}`,
+      `https://api.github.com/repos/${REPOSITORY}/contents/${currentPath}${query}`,
       { headers: { Accept: "application/vnd.github.v3+json" } }
     );
     const data = await response.json();
@@ -82,7 +84,7 @@ async function downloadDirectory(
 
       if (item.type === "dir") {
         // If it's a directory, recursively download its contents
-        await downloadDirectory(destPath, item.path);
+        await downloadDirectory(destPath, item.path, branch);
       } else if (item.type === "file") {
         // If it's a file, download and save it
         const fileSpinner = ora(`Downloading ${item.path}...`).start();

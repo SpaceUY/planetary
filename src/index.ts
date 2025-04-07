@@ -19,4 +19,4 @@ program
 usePlanetaryCommand(program);
 useNestCommand(program);
 
-program.parse(process.argv);
+program.parse();

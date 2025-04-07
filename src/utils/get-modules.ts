@@ -12,6 +12,7 @@ interface PlanetaryConfig {
       implementations: Array<{
         name: string;
         description: string;
+        dependencies?: string[];
       }>;
     };
   };
@@ -21,6 +22,7 @@ export interface ModuleImplementationConfig {
   name: string;
   description: string;
   path?: string;
+  dependencies?: string[];
 }
 
 export interface ModuleConfig {
@@ -39,7 +41,7 @@ export const getAvailableModules = async (
 ): Promise<Record<string, ModuleConfig>> => {
   const spinner = ora("Fetching available modules...").start();
   const branchQuery = branch ? `?ref=${branch}` : "";
-  
+
   try {
     // Fetch the planetary.json file from the repository
     const response = await fetch(
