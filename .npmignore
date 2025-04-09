@@ -1,0 +1,8 @@
+src/
+tests/
+.github/
+.gitignore
+.npmrc
+README.md
+tsconfig.json
+*.log
