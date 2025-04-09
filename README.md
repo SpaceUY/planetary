@@ -9,7 +9,7 @@ This tool aims at helping streamline project setup by providing common functiona
 First, login to the registry:
 
 ```bash
-npm login --scope=@spaceuy --auth-type=legacy --registry=https://npm.pkg.github.com
+npm login --scope=@SpaceUY --auth-type=legacy --registry=https://npm.pkg.github.com
 ```
 
 Then:
