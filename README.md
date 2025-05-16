@@ -1,6 +1,6 @@
 # Planetary CLI
 
-A command-line tool for internal usage that copies specific folders from the template (boilerplate) folders into a chosen folder. This is designed to work similarly to ShadCN - the copies are independent from the template, and can be modified and customized at will.
+A command-line tool for internal usage that copies specific folders from the template (boilerplate) folders into a chosen folder of a destination project. This is designed to work similarly to ShadCN - the copies are independent from the template, and can be modified and customized at will.
 
 This tool aims at helping streamline project setup by providing common functionality in the form of components for NestJS, React, and React Native apps.
 
