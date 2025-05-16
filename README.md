@@ -80,7 +80,7 @@ You can modify this copy to fit your needs in the project.
 
 Contributing is split into two parts: boilerplate (or template) contributions, and planetary contributions.
 
-## Boilerplant contributions
+## Boilerplate contributions
 
 Each boilerplate or template for the different project types is located at different repositories; to contribute to them, make sure you submit a PR to the corresponding repo, and reach out to the maintaining team if you have any doubts about the procedure to follow.
 
