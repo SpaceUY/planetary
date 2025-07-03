@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { version } from "../package.json";
-
 // Commands
 import { useNestCommand } from "./commands/nest/command";
 import { usePlanetaryCommand } from "./commands/planetary/command";
+import { useReactNativeCommand } from "./commands/react-native/command";
+import { version } from "../package.json";
 
 const program = new Command();
 
@@ -18,5 +18,6 @@ program
 
 usePlanetaryCommand(program);
 useNestCommand(program);
+useReactNativeCommand(program);
 
 program.parse();

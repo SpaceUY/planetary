@@ -1,11 +1,12 @@
-import chalk from "chalk";
-import inquirer from "inquirer";
-
-import { addNestModule } from "../nest";
 import {
   printUnderConstructionMessage,
   printWelcomeMessage,
 } from "../../utils/shared-prints";
+
+import { addNestModule } from "../nest";
+import { addReactNativeModule } from "../react-native";
+import chalk from "chalk";
+import inquirer from "inquirer";
 
 export interface PlanetaryOptions {
   destination?: string;
@@ -47,6 +48,9 @@ export const addPlanetaryComponent = async (
   switch (app) {
     case AVAILABLE_APPS.NEST:
       await addNestModule(options, true);
+      break;
+    case AVAILABLE_APPS.REACT_NATIVE:
+      await addReactNativeModule(options, true);
       break;
     default:
       await printUnderConstructionMessage(app);

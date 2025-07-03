@@ -10,25 +10,43 @@ import { chooseDestination } from "../../utils/choose-destination";
 import { chooseImplementation } from "../../utils/choose-module-implementation";
 import { chooseModule } from "../../utils/choose-module";
 import { cloneRepository } from "../../utils/clone-repository";
-import { getAvailableModules } from "../../utils/get-modules";
+import fs from "fs-extra";
+import path from "path";
 
-export const REPOSITORY = "SpaceUY/NestJS-Template";
+export const REPOSITORY = "SpaceUY/ReactNative-Template";
 
 /**
- * Add a NestJS module to a project.
+ * Get available modules from template repository
+ */
+const getAvailableModules = async (branch?: string) => {
+  const branchQuery = branch ? `?ref=${branch}` : "";
+  const response = await fetch(
+    `https://api.github.com/repos/${REPOSITORY}/contents/planetary.json${branchQuery}`,
+    { headers: { Accept: "application/vnd.github.v3+json" } }
+  );
+
+  if (!response.ok) {
+    throw new Error(`GitHub API responded with status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  const content = Buffer.from(data.content, "base64").toString("utf-8");
+  const config = JSON.parse(content);
+  return config.modules;
+};
+
+/**
+ * Add a React Native module to a project.
  * @param {PlanetaryOptions} options - The options for the command.
  */
-export const addNestModule = async (
+export const addReactNativeModule = async (
   options: PlanetaryOptions,
   skipWelcome: boolean = false
 ): Promise<void> => {
-  if (!skipWelcome) await printWelcomeMessage(COMMANDS.NEST);
+  if (!skipWelcome) await printWelcomeMessage(COMMANDS.REACT_NATIVE);
 
   try {
-    const availableModules = await getAvailableModules(
-      REPOSITORY,
-      options.branch
-    );
+    const availableModules = await getAvailableModules(options.branch);
     const moduleConfig = await chooseModule(availableModules, options.module);
 
     const implementations = moduleConfig.implementations;
@@ -40,14 +58,7 @@ export const addNestModule = async (
     options.destination = await chooseDestination(options.destination);
 
     const { path: implPath, name: implName } = implementation;
-
-    let pathInRepository = "";
-
-    if (implPath === "") {
-      pathInRepository = `${moduleConfig.path}`;
-    } else {
-      pathInRepository = `${moduleConfig.path}/${implPath ?? implName}`;
-    }
+    const pathInRepository = path.join(moduleConfig.path, implPath ?? implName);
 
     await cloneRepository(
       REPOSITORY,
@@ -57,8 +68,8 @@ export const addNestModule = async (
       options.branch
     );
 
-    await printSuccessMessage(moduleConfig.name, implementation);
+    await printSuccessMessage(implementation.name, implementation);
   } catch (error: any) {
-    console.error(chalk.red("Error copying NestJS module:"), error.message);
+    console.error(chalk.red("Error copying React Native module:"), error.message);
   }
-};
+}; 
