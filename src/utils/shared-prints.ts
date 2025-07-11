@@ -19,6 +19,9 @@ export const printWelcomeMessage = async (command?: string): Promise<void> => {
     case "nest":
       message = `You're about to add a NestJS module from the SpaceDev templates.\n`;
       break;
+    case "react":
+      message = `You're about to create a new React project with Vite and TypeScript.\n`;
+      break;
     default:
       message = `You're about to copy a component from the SpaceDev templates.\n`;
   }

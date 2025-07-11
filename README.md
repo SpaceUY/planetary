@@ -62,7 +62,10 @@ You can get started by simply running `$ planetary` on your command line, and fo
 In addition to this, you can expand `planetary`'s start command to streamline you experience, if you know what you want in advance.
 
 You can input:
-- The project type, via: `$ planetary <PROJECT_TYPE>`. Available values for `PROJECT_TYPE` at the time are: `nestjs`.
+- The project type, via: `$ planetary <PROJECT_TYPE>`. Available values for `PROJECT_TYPE` at the time are:
+    - `nestjs`
+    - `react`
+    - `react-native`
 - Flags, for specific purposes (all of them are optional):
     - `-b, --branch`: Select the specific branch of the remote repository to fetch from. Defaults to the main branch.
     - `-m, --module`: The module to copy. Use this if you already know the module in advance.
