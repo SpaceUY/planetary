@@ -4,6 +4,7 @@ import { Command } from "commander";
 // Commands
 import { useNestCommand } from "./commands/nest/command";
 import { usePlanetaryCommand } from "./commands/planetary/command";
+import { useReactCommand } from "./commands/react/command";
 import { useReactNativeCommand } from "./commands/react-native/command";
 import { version } from "../package.json";
 
@@ -18,6 +19,7 @@ program
 
 usePlanetaryCommand(program);
 useNestCommand(program);
+useReactCommand(program);
 useReactNativeCommand(program);
 
 program.parse();
